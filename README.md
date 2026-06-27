@@ -15,33 +15,31 @@ A full-stack cloud infrastructure monitoring dashboard built with **Spring Boot*
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Backend | Java 17, Spring Boot 3.2, AWS SDK v2 |
-| Frontend | ReactJS 18, Recharts, Axios |
-| Cloud | AWS EC2, S3, CloudWatch |
-| Build | Maven (backend), npm (frontend) |
+| Layer     | Technology                          |
+|-----------|-------------------------------------|
+| Backend   | Java 17, Spring Boot 3.2, AWS SDK v2 |
+| Frontend  | ReactJS 18, Recharts, Axios         |
+| Cloud     | AWS EC2, S3, CloudWatch             |
+| Build     | Maven (backend), npm (frontend)     |
 
 ---
 
 ## Project Structure
-
-```
 aws-infra-monitor/
-├── backend/                          # Spring Boot application
+
+├── backend/
 │   ├── src/main/java/com/awsmonitor/
-│   │   ├── config/                   # AWS SDK & CORS configuration
-│   │   ├── controller/               # REST controllers (EC2, S3, Metrics)
-│   │   ├── service/                  # Business logic & AWS SDK integration
-│   │   └── model/                    # Data models
+│   │   ├── config/         # AWS SDK & CORS configuration
+│   │   ├── controller/     # REST controllers (EC2, S3, Metrics)
+│   │   ├── service/        # Business logic & AWS SDK integration
+│   │   └── model/          # Data models
 │   └── src/main/resources/
-│       └── application.properties    # App configuration
-└── frontend/                         # React application
-    └── src/
-        ├── components/               # EC2Instances, S3Buckets, MetricsChart
-        ├── services/                 # Axios API service layer
-        └── App.jsx                   # Main app with tab navigation
-```
+│       └── application.properties
+└── frontend/
+└── src/
+├── components/     # EC2Instances, S3Buckets, MetricsChart
+├── services/       # Axios API service layer
+└── App.jsx         # Main app with tab navigation
 
 ---
 
@@ -50,7 +48,7 @@ aws-infra-monitor/
 - Java 17+
 - Node.js 18+
 - Maven 3.8+
-- AWS Account with IAM credentials (EC2, S3, CloudWatch read access)
+- AWS Account with IAM credentials (EC2, S3, CloudWatch access)
 
 ---
 
@@ -59,13 +57,11 @@ aws-infra-monitor/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/aws-infra-monitor.git
+git clone https://github.com/shreyasrivastava11/aws-infra-monitor.git
 cd aws-infra-monitor
 ```
 
 ### 2. Configure AWS Credentials
-
-Set environment variables (recommended) or edit `application.properties`:
 
 ```bash
 export AWS_ACCESS_KEY_ID=your-access-key
@@ -73,7 +69,7 @@ export AWS_SECRET_ACCESS_KEY=your-secret-key
 export AWS_REGION=us-east-1
 ```
 
-> **Important:** Never hardcode credentials. Use environment variables or AWS IAM roles.
+> **Important:** Never hardcode credentials. Always use environment variables or AWS IAM roles.
 
 ### 3. Run the Backend
 
@@ -99,26 +95,26 @@ Frontend runs on `http://localhost:3000` and proxies API calls to port 8080.
 ## API Endpoints
 
 ### EC2
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/ec2/instances` | List all EC2 instances |
-| GET | `/api/ec2/instances/{id}` | Get instance by ID |
-| POST | `/api/ec2/instances/{id}/start` | Start an instance |
-| POST | `/api/ec2/instances/{id}/stop` | Stop an instance |
+| Method | Endpoint                        | Description           |
+|--------|---------------------------------|-----------------------|
+| GET    | `/api/ec2/instances`            | List all EC2 instances |
+| GET    | `/api/ec2/instances/{id}`       | Get instance by ID    |
+| POST   | `/api/ec2/instances/{id}/start` | Start an instance     |
+| POST   | `/api/ec2/instances/{id}/stop`  | Stop an instance      |
 
 ### S3
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/s3/buckets` | List all S3 buckets |
-| GET | `/api/s3/buckets/{name}/objects` | List objects in a bucket |
+| Method | Endpoint                              | Description              |
+|--------|---------------------------------------|--------------------------|
+| GET    | `/api/s3/buckets`                     | List all S3 buckets      |
+| GET    | `/api/s3/buckets/{name}/objects`      | List objects in a bucket |
 
 ### CloudWatch Metrics
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/metrics/{id}/cpu` | CPU Utilization (last 1hr) |
-| GET | `/api/metrics/{id}/network-in` | Network In bytes |
-| GET | `/api/metrics/{id}/network-out` | Network Out bytes |
-| GET | `/api/metrics/{id}/disk-read` | Disk Read Ops |
+| Method | Endpoint                        | Description                  |
+|--------|---------------------------------|------------------------------|
+| GET    | `/api/metrics/{id}/cpu`         | CPU Utilization (last 1hr)   |
+| GET    | `/api/metrics/{id}/network-in`  | Network In bytes             |
+| GET    | `/api/metrics/{id}/network-out` | Network Out bytes            |
+| GET    | `/api/metrics/{id}/disk-read`   | Disk Read Ops                |
 
 ---
 
@@ -146,9 +142,9 @@ Frontend runs on `http://localhost:3000` and proxies API calls to port 8080.
 
 ---
 
-## Screenshots
+## Known Fixes & Notes
 
-> Dashboard shows EC2 instances with live state badges, S3 bucket explorer with object listing, and CloudWatch metric line charts per instance.
+- **`platformAsString()` vs `platformDetailsAsString()`** – AWS SDK v2's `Instance` model does not have `platformDetailsAsString()`. Use `platformAsString()` instead. Returns `"windows"` for Windows instances and `null` for Linux/UNIX — a default fallback of `"Linux/UNIX"` is applied in `EC2Service`.
 
 ---
 
