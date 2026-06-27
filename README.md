@@ -1,5 +1,4 @@
 # AWS Infrastructure Monitor
-
 A full-stack cloud infrastructure monitoring dashboard built with **Spring Boot** (backend) and **ReactJS** (frontend), integrating the **AWS SDK v2** to provide real-time visibility into EC2 instances, S3 buckets, and CloudWatch metrics.
 
 ---
