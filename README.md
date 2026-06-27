@@ -1,7 +1,6 @@
 # AWS Infrastructure Monitor
-A full-stack cloud infrastructure monitoring dashboard built with **Spring Boot** (backend) and **ReactJS** (frontend), integrating the **AWS SDK v2** to provide real-time visibility into EC2 instances, S3 buckets, and CloudWatch metrics.
 
----
+A full-stack cloud infrastructure monitoring dashboard built with **Spring Boot** (backend) and **ReactJS** (frontend), integrating the **AWS SDK v2** to provide real-time visibility into EC2 instances, S3 buckets, and CloudWatch metrics.
 
 ## Features
 
@@ -9,8 +8,6 @@ A full-stack cloud infrastructure monitoring dashboard built with **Spring Boot*
 - **S3 Bucket Explorer** – List all S3 buckets, view object counts, and browse bucket contents.
 - **CloudWatch Metrics** – Visualize real-time CPU utilization, Network In/Out metrics using interactive line charts (last 1 hour, 5-minute intervals).
 - **REST API Backend** – Clean RESTful endpoints built with Spring Boot, ready for integration with other enterprise systems.
-
----
 
 ## Tech Stack
 
@@ -20,8 +17,6 @@ A full-stack cloud infrastructure monitoring dashboard built with **Spring Boot*
 | Frontend  | ReactJS 18, Recharts, Axios         |
 | Cloud     | AWS EC2, S3, CloudWatch             |
 | Build     | Maven (backend), npm (frontend)     |
-
----
 
 ## Project Structure
 aws-infra-monitor/
@@ -40,16 +35,12 @@ aws-infra-monitor/
 ├── services/       # Axios API service layer
 └── App.jsx         # Main app with tab navigation
 
----
-
 ## Prerequisites
 
 - Java 17+
 - Node.js 18+
 - Maven 3.8+
 - AWS Account with IAM credentials (EC2, S3, CloudWatch access)
-
----
 
 ## Setup & Run
 
@@ -89,8 +80,6 @@ npm start
 
 Frontend runs on `http://localhost:3000` and proxies API calls to port 8080.
 
----
-
 ## API Endpoints
 
 ### EC2
@@ -115,8 +104,6 @@ Frontend runs on `http://localhost:3000` and proxies API calls to port 8080.
 | GET    | `/api/metrics/{id}/network-out` | Network Out bytes            |
 | GET    | `/api/metrics/{id}/disk-read`   | Disk Read Ops                |
 
----
-
 ## IAM Permissions Required
 
 ```json
@@ -139,13 +126,9 @@ Frontend runs on `http://localhost:3000` and proxies API calls to port 8080.
 }
 ```
 
----
-
 ## Known Fixes & Notes
 
 - **`platformAsString()` vs `platformDetailsAsString()`** – AWS SDK v2's `Instance` model does not have `platformDetailsAsString()`. Use `platformAsString()` instead. Returns `"windows"` for Windows instances and `null` for Linux/UNIX — a default fallback of `"Linux/UNIX"` is applied in `EC2Service`.
-
----
 
 ## Author
 
