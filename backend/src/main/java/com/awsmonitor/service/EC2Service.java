@@ -67,7 +67,7 @@ public class EC2Service {
             .publicIp(instance.publicIpAddress())
             .privateIp(instance.privateIpAddress())
             .availabilityZone(instance.placement().availabilityZone())
-            .platform(instance.platformDetailsAsString())
+            .platform(instance.platformAsString())
             .launchTime(instance.launchTime() != null ? instance.launchTime().toString() : "N/A")
             .name(name)
             .build();
